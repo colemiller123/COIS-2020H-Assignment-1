@@ -1,1 +1,1 @@
-# COIS-2020H-Assignment-1
+# COIS2020HAssignment1
