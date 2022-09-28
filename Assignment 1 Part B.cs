@@ -1,28 +1,24 @@
 using System;
 
-namespace AssigmentOne {
-    class Program {
-        static void Main(string[] args) {
-            //Run code here
-            Console.Write("Hello World");
-            
-        }
-    }
-}
-
 public class MyString {
     private class Node {
         public char item;
         public Node next;
+
         // Constructor (2 marks)
-        //public Node ( … ) { … }
+        public Node (char item, Node next) {
+            this.item = item;
+            this.next = next;
+        }
     }
 
-    //private Node front; // Reference to the first (header) node
-    //private int length; // Number of characters in MyString
+    private Node front; // Reference to the first (header) node
+    private int length; // Number of characters in MyString
     
     // Initialize with a header node an instance of MyString to the given character array A (4 marks)
-    //public MyString (char[ ] A) { … }
+    public MyString (char[ ] A) {
+        
+    }
     
     // Using a stack, reverse this instance of MyString (6 marks)
     //public void Reverse ( ) { Stack<char> S; … }
@@ -39,5 +35,18 @@ public class MyString {
     
     // Print out this instance of MyString (3 marks)
     //public void Print( ) { … }
+}
+
+namespace COIS2020HAssignment1 {
+    class Program {
+        static void Main(string[] args) {
+            //Run code here
+            Console.Write("Hello World");
+
+            //Testing
+            //NodeA = new Node('C', null); 
+            //Console.Write(NodeA.item);
+        }
+    }
 }
 

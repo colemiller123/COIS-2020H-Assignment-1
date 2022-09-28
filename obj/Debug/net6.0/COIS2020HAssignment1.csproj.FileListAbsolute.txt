@@ -1,0 +1,15 @@
+C:\Users\Cole\Documents\GitHub\COIS2020HAssignment1\bin\Debug\net6.0\COIS2020HAssignment1.exe
+C:\Users\Cole\Documents\GitHub\COIS2020HAssignment1\bin\Debug\net6.0\COIS2020HAssignment1.deps.json
+C:\Users\Cole\Documents\GitHub\COIS2020HAssignment1\bin\Debug\net6.0\COIS2020HAssignment1.runtimeconfig.json
+C:\Users\Cole\Documents\GitHub\COIS2020HAssignment1\bin\Debug\net6.0\COIS2020HAssignment1.dll
+C:\Users\Cole\Documents\GitHub\COIS2020HAssignment1\bin\Debug\net6.0\COIS2020HAssignment1.pdb
+C:\Users\Cole\Documents\GitHub\COIS2020HAssignment1\obj\Debug\net6.0\COIS2020HAssignment1.csproj.AssemblyReference.cache
+C:\Users\Cole\Documents\GitHub\COIS2020HAssignment1\obj\Debug\net6.0\COIS2020HAssignment1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Cole\Documents\GitHub\COIS2020HAssignment1\obj\Debug\net6.0\COIS2020HAssignment1.AssemblyInfoInputs.cache
+C:\Users\Cole\Documents\GitHub\COIS2020HAssignment1\obj\Debug\net6.0\COIS2020HAssignment1.AssemblyInfo.cs
+C:\Users\Cole\Documents\GitHub\COIS2020HAssignment1\obj\Debug\net6.0\COIS2020HAssignment1.csproj.CoreCompileInputs.cache
+C:\Users\Cole\Documents\GitHub\COIS2020HAssignment1\obj\Debug\net6.0\COIS2020HAssignment1.dll
+C:\Users\Cole\Documents\GitHub\COIS2020HAssignment1\obj\Debug\net6.0\refint\COIS2020HAssignment1.dll
+C:\Users\Cole\Documents\GitHub\COIS2020HAssignment1\obj\Debug\net6.0\COIS2020HAssignment1.pdb
+C:\Users\Cole\Documents\GitHub\COIS2020HAssignment1\obj\Debug\net6.0\COIS2020HAssignment1.genruntimeconfig.cache
+C:\Users\Cole\Documents\GitHub\COIS2020HAssignment1\obj\Debug\net6.0\ref\COIS2020HAssignment1.dll
