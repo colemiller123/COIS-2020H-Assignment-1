@@ -5,10 +5,12 @@ namespace COIS2020HAssignment1
         static void Main(string[] args)
         {
             //Testing
-            char [] testArray = {'c', 'o', 'l', 'e', 'm', 'i', 'l'};
+            char [] testArray = {'c', 'o', 'l', 'e','m', 'i', 'l', 'l','e', 'r'};
             MyString testString = new MyString(testArray);
 
-            //testString.Reverse();
+            
+            testString.Print();
+            testString.Reverse();
             testString.Print();
 
         }
@@ -46,8 +48,6 @@ namespace COIS2020HAssignment1
                         tempPointer.next = newNode;   
                     }
                     length++;
-                    Console.WriteLine(tempPointer.next.item);
-                    Console.WriteLine(tempPointer.next.next);
                 }
             }
             
@@ -56,15 +56,22 @@ namespace COIS2020HAssignment1
                 Stack<char> S;
                 S = new Stack<char> ();
                 
-                //Reverse the order
-                while (length != 0) {
-                    S.Push(front.item);
-                    length--;
-                }
-                S.Push(front.item);
-                Console.Write(S.Peek());
+                //Create a stack with the characters from this instances MyString, with the front being on the bottom of the stack
+                Node String = front.next;
+                for (int tempLength = length; tempLength != 0; tempLength--) {
+                    //Add the front to the top of the stack
+                    S.Push(String.item);
 
-                //Create a
+                    //Move the front forward
+                    String = String.next;
+                }
+
+                //Reverse the order
+                String = front.next;
+                for (int tempLength = S.Count; tempLength > 0; tempLength--) {
+                    String.item = S.Pop();
+                    String = String.next;
+                }
             }
             
             // Return the index of the first occurrence of c in this instance; otherwise -1 (4 marks)
