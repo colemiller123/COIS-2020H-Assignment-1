@@ -5,7 +5,7 @@ namespace COIS2020HAssignment1
         static void Main(string[] args)
         {
             //Testing
-            char [] testArray = {'c', 'o', 'l', 'e'};
+            char [] testArray = {'c', 'o', 'l', 'e', 'm', 'i', 'l'};
             MyString testString = new MyString(testArray);
 
             //testString.Reverse();
@@ -17,6 +17,10 @@ namespace COIS2020HAssignment1
                 public char item;
                 public Node next;
 
+                public Node () {
+                    this.next = null;
+                }
+
                 // Constructor (2 marks)
                 public Node (char item, Node next) {
                     this.item = item;
@@ -24,22 +28,26 @@ namespace COIS2020HAssignment1
                 }
             }
 
-            private Node front = null;      // Reference to the first (header) node
+            private Node front = new Node();      // Reference to the first (header) node
             private int length = 0;         // Number of characters in MyString
 
             // Initialize with a header node an instance of MyString to the given character array A (4 marks)
             public MyString (char[ ] A) {
+                Node tempPointer = front;   //Points to where the last node in the linked list is
                 foreach (char character in A) {
                     //Create a new node for each character
                     Node newNode = new Node(character, null);
 
                     if (length == 0) {
-                        front = newNode;
+                        front.next = newNode;
                     }
                     else {
-                        
+                        tempPointer = tempPointer.next;
+                        tempPointer.next = newNode;   
                     }
                     length++;
+                    Console.WriteLine(tempPointer.next.item);
+                    Console.WriteLine(tempPointer.next.next);
                 }
             }
             
@@ -71,23 +79,15 @@ namespace COIS2020HAssignment1
             
             // Print out this instance of MyString (3 marks)
             public void Print() {
-                //Testing
-                Console.WriteLine(length);
-                try {
-                    Console.WriteLine(front.item);
-                } catch {
-                    
+                Console.WriteLine("Length of the String: " + length);
+                
+                //for each character/node in the linked list, print out the character
+                Node String = front.next;
+                for (int tempLength = length; tempLength > 0; tempLength--) {
+                    Console.WriteLine(String.item);
+                    String = String.next;
                 }
 
-                int tempLength = length;
-                while (tempLength > 0) {
-                    Node tempFront = front;
-                    Console.WriteLine(tempFront.item);
-
-                    tempFront = front.next;
-                    
-                    tempLength--;
-                }
             }
         }
     }
