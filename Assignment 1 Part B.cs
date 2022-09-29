@@ -9,10 +9,12 @@ namespace COIS2020HAssignment1
             MyString testString = new MyString(testArray);
 
             
-            testString.Print();
-            testString.Reverse();
-            testString.Print();
+            //testString.Print();
+            //testString.Reverse();
+            //testString.Print();
 
+            Console.WriteLine(testString.IndexOf('c'));
+            Console.WriteLine(testString.IndexOf('v'));
         }
         public class MyString {
             private class Node {
@@ -75,10 +77,27 @@ namespace COIS2020HAssignment1
             }
             
             // Return the index of the first occurrence of c in this instance; otherwise -1 (4 marks)
-            //public int IndexOf(char c) { … }
+            public int IndexOf(char c) {
+                //Loop through MyString instance
+                Node currentIndex = front;
+                int index = 0;
+                for (int tempLength = length; tempLength >= 0; tempLength--) {
+                    if (currentIndex.item == c) {
+                        return index;
+                    }
+                    else {
+                        index++;
+                        currentIndex = currentIndex.next;
+                    }   
+                }  
+                //Return -1 if the c was not found in MyString 
+                return -1;
+            }
             
             // Remove all occurrences of c from this instance (4 marks)
-            //public void Remove (char c) { … }
+            public void Remove (char c) {
+                
+            }
             
             // Return true if obj is both of type MyString and the same as this instance; 
             // otherwise false (6 marks)
