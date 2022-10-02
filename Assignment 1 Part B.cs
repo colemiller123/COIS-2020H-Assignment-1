@@ -16,9 +16,23 @@ namespace COIS2020HAssignment1
             //Console.WriteLine(testString.IndexOf('c'));
             //Console.WriteLine(testString.IndexOf('v'));
 
+            //testString.Remove('c');
+            //testString.Print();
+
+            MyString testStringTwo = new MyString(testArray);
+            //testStringTwo.Print();
+            testString.Equals(testStringTwo);
+
             testString.Remove('c');
-            testString.Print();
+            testString.Equals(testStringTwo);
+
+            Car carOne = new Car();
+            testString.Equals(carOne);
         }
+        public class Car {
+            int color = 1;
+        }
+
         public class MyString {
             private class Node {
                 public char item;
@@ -118,7 +132,52 @@ namespace COIS2020HAssignment1
             
             // Return true if obj is both of type MyString and the same as this instance; 
             // otherwise false (6 marks)
-            //public override bool Equals (object obj) { … }
+            public override bool Equals(object obj) {
+                bool returnStatement = false;
+                
+                //Check obj is not empty
+                if (obj == null) {
+                    returnStatement = false;
+                }
+                
+                //Check obj is MyString object
+                if (obj.GetType() == this.GetType()) {
+                    //True, object is MyString
+                    MyString objToCompare = (MyString) obj;
+
+                    //Check if the instances' have the same data
+                    if (this.length == objToCompare.length) {
+                        Node tempThis = this.front;
+                        Node tempObjectNodeToCompare = objToCompare.front;
+                        
+                        for (int i = objToCompare.length; i > 0; i--) {
+                            //Compare each node value
+                            if (tempThis.item == tempObjectNodeToCompare.item) {
+                                //True
+                            }
+                            else {
+                                //False
+                                Console.WriteLine("node not the same");
+                                Console.WriteLine("this" + tempThis.item);
+                                Console.WriteLine("" + tempObjectNodeToCompare.item);
+
+                                Console.WriteLine("this" + tempThis.next);
+                                Console.WriteLine("" + tempObjectNodeToCompare.next);
+                                
+                                returnStatement = false;
+                                break;
+                            }
+
+                            //Move up the front of both objects
+                            tempThis = tempThis.next;
+                            tempObjectNodeToCompare = tempObjectNodeToCompare.next;
+                        }
+                        returnStatement = true;
+                    }
+                }
+                Console.WriteLine(returnStatement);
+                return returnStatement;
+            }
             
             // Print out this instance of MyString (3 marks)
             public void Print() {
