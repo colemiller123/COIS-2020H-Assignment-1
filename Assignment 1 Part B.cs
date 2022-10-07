@@ -5,8 +5,8 @@ namespace COIS2020HAssignment1
         static void Main(string[] args)
         {
             //Testing
-            char [] testArray = {'c', 'o', 'l', 'e','m', 'i', 'l', 'l','e', 'r'};
-            MyString testString = new MyString(testArray);
+            //char [] testArray = {'c', 'o', 'l', 'e','m', 'i', 'l', 'l','e', 'r'};
+            //MyString testString = new MyString(testArray);
 
             
             //testString.Print();
@@ -19,16 +19,94 @@ namespace COIS2020HAssignment1
             //testString.Remove('c');
             //testString.Print();
 
-            MyString testStringTwo = new MyString(testArray);
+            //MyString testStringTwo = new MyString(testArray);
             //testStringTwo.Print();
-            Console.WriteLine(testString.Equals(testStringTwo));
+            //Console.WriteLine(testString.Equals(testStringTwo));
 
-            testString.Remove('c');
-            Console.WriteLine(testString.Equals(testStringTwo));
+            //testString.Remove('c');
+            //Console.WriteLine(testString.Equals(testStringTwo));
 
-            Car carOne = new Car();
-            Console.WriteLine(testString.Equals(carOne));
+            //Car carOne = new Car();
+            //Console.WriteLine(testString.Equals(carOne));
+
+            //////////////Demo main menu//////////////////////////
+
+            //lenght of 20 is arbitrary
+            MyString [] userStrings = new MyString[20]; 
+            bool quitProgram = false;
+
+            //Main Loop
+            while (quitProgram == false) {
+                Console.Clear();
+                Console.WriteLine("Part B Main Menu");
+                Console.WriteLine("1: Create a String");
+                Console.WriteLine("2: Reverse a string");
+                Console.WriteLine("3: Remove c from a string");
+                Console.WriteLine("4: Check the equalilty of an object to MyString");
+                Console.WriteLine("5: Print MyString");
+                Console.WriteLine("6: Quit");
+                Console.WriteLine("Please type in the number of the method you want to use.");
+
+                string wait;
+                int userArrayIndex = 0;
+                
+                //Get User input
+                string userInput = Console.ReadLine();
+                int result = Int32.Parse(userInput);
+
+                //Handle user input
+                switch (result) {
+                case 1:
+                    Console.Clear();
+                    Console.WriteLine("Please type the string you would like to create.");
+                    userInput = Console.ReadLine();
+                    
+                    //Convert userInput to a char array
+                    char [] userArray = new char[userInput.Length];
+                    for (int i = 0; i < userInput.Length; i++) {
+                        userArray[i] = userInput[i];
+                    }
+
+                    MyString newUserString = new MyString(userArray);
+
+                    //Store that string in an array
+                    userStrings[userArrayIndex] = newUserString;
+                    userArrayIndex++;
+
+                    //wait
+                    wait = Console.ReadLine();
+                    break;
+                case 2:
+                    
+                    break;
+                case 3:
+                    Console.WriteLine("Wednesday");
+                    break;
+                case 4:
+                    Console.WriteLine("Thursday");
+                    break;
+                case 5:
+                    //Display all user created Strings
+                    for (int i = 0; i < ) {
+
+                    }
+
+                    //Prompt them to pick one
+
+                    //print that string
+                    
+                    userStrings[userArrayIndex - 1].Print();
+                    wait = Console.ReadLine();
+                    break;
+                case 6:
+                    quitProgram = true;
+                    break;
+                }
+                //testing
+                Console.WriteLine(userInput);
+            }
         }
+
         public class Car {
             int color = 1;
         }
