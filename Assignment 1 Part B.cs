@@ -51,7 +51,7 @@ namespace COIS2020HAssignment1
                     }
 
                     //Get user input
-                    Console.WriteLine("Please type the number for the string you would like to reverse.");
+                    Console.WriteLine("Please type the number to select the MyString Object.");
                     string userInput = Console.ReadLine();
                     userInputInt = Int32.Parse(userInput);
 
@@ -81,9 +81,9 @@ namespace COIS2020HAssignment1
                 Console.WriteLine("Part B Main Menu");
                 Console.WriteLine("1: Create a String");
                 Console.WriteLine("2: Reverse a string");
-                Console.WriteLine("3: Remove c from a string");
+                Console.WriteLine("3: Remove a character from a string");
                 Console.WriteLine("4: Check the equalilty of an object to MyString");
-                Console.WriteLine("5: Print MyString");
+                Console.WriteLine("5: Print a MyString object");
                 Console.WriteLine("6: Quit");
                 Console.WriteLine("Please type in the number of the method you want to use.");
 
@@ -119,27 +119,43 @@ namespace COIS2020HAssignment1
                     userInputInt = VerifyUserInput(userStringsArrayLength, userStrings);
                         
                     //Call method on the selected string
-                    
+                    userStrings[userInputInt].Reverse();
 
                     wait = Console.ReadLine();
                     break;
                 case 3:
-                    //Display list of user created MyStrings
-
-                    //Get user input
-
-                    //Check user input
-
+                    userInputInt = VerifyUserInput(userStringsArrayLength, userStrings);
+                        
                     //Call method on the selected string
+                    Console.WriteLine("Please type the char you would like to remove from the string.");
+                    userInput = Console.ReadLine();
+
+                    //verify user input
+                    //CHeck the user has not entered more than one character
+
+                    char userInputChar = char.Parse(userInput);
+                    Console.WriteLine(userInputChar);
+
+                    userStrings[userInputInt].Remove(userInputChar);
+
+                    wait = Console.ReadLine();
                     break;
                 case 4:
-                    //Display list of user created MyStrings
+                    userInputInt = VerifyUserInput(userStringsArrayLength, userStrings);
 
-                    //Get user input
-
-                    //Check user input
+                    //Display objects for the User to compare to
+                    
+                    //Prompt User for object
+                    Console.WriteLine("Please type the index number of the object you would like to compare with the previously selected object.");
+                    string userInputObjectToCompare = Console.ReadLine();
+                    int userInputObjectToCompareInt = Int32.Parse(userInputObjectToCompare);
+                    //Car object
+                    //User's MyString objects
 
                     //Call method on the selected string
+                    //userStrings[userInputInt].Equals();
+
+                    wait = Console.ReadLine();
                     break;
                 case 5:
                     userInputInt = VerifyUserInput(userStringsArrayLength, userStrings);
@@ -237,7 +253,7 @@ namespace COIS2020HAssignment1
                         currentIndex = currentIndex.next;
                     }   
                 }  
-                //Return -1 if the c was not found in MyString 
+                //Return -1 if c was not found in MyString 
                 return -1;
             }
             
