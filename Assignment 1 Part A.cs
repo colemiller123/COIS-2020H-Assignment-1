@@ -78,21 +78,21 @@ public class Puzzle
             for (int ix = 0; ix < N; ix++)
             {   //considers acrosses first, idk why but it feels right
                 //if on left end of grid or to right of black square, and space is ample
-                if (ix + 2 < N
+                if (ix + 1 < N
                     && (ix > 0 && grid[ix - 1, iy].Color == TColor.BLACK || ix == 0)
                     && grid[ix, iy].Color == TColor.WHITE
-                    && grid[ix + 1, iy].Color == TColor.WHITE
-                    && grid[ix + 2, iy].Color == TColor.WHITE)
+                    && grid[ix + 1, iy].Color == TColor.WHITE)
+                    //&& grid[ix + 2, iy].Color == TColor.WHITE)
                 {
                     grid[ix, iy].Number = number;
                     number++;
                 }
                 //downs considerations, fundamentally same as across but also doesn't overwrite existing numbers
-                if (grid[ix, iy].Number == -1 && iy + 2 < N
+                if (grid[ix, iy].Number == -1 && iy + 1 < N
                     && (iy > 0 && grid[ix, iy - 1].Color == TColor.BLACK || iy == 0)
                     && grid[ix, iy].Color == TColor.WHITE
-                    && grid[ix, iy + 1].Color == TColor.WHITE
-                    && grid[ix, iy + 2].Color == TColor.WHITE)
+                    && grid[ix, iy + 1].Color == TColor.WHITE)
+                    //&& grid[ix, iy + 2].Color == TColor.WHITE)
                 {
                     grid[ix, iy].Number = number;
                     number++;
@@ -114,18 +114,18 @@ public class Puzzle
             {
                 if (grid[ix, iy].Number != -1) //only checks numbered squares
                 { //has to check validity of across and down again in order to determine if the number is for down or across or both, it feels like this should be avoidable but idk
-                    if (ix + 2 < N
+                    if (ix + 1 < N
                     && (ix > 0 && grid[ix - 1, iy].Color == TColor.BLACK || ix == 0)
-                    && grid[ix + 1, iy].Color == TColor.WHITE
-                    && grid[ix + 2, iy].Color == TColor.WHITE)
+                    && grid[ix + 1, iy].Color == TColor.WHITE)
+                    //&& grid[ix + 2, iy].Color == TColor.WHITE)
                     {
                         Across[acrossCount] = grid[ix, iy].Number; //occupying arrays with appropriate clue numbers
                         acrossCount++;
                     }
-                    if (iy + 2 < N //same as across but down
+                    if (iy + 1 < N //same as across but down
                     && (iy > 0 && grid[ix, iy - 1].Color == TColor.BLACK || iy == 0)
-                    && grid[ix, iy + 1].Color == TColor.WHITE
-                    && grid[ix, iy + 2].Color == TColor.WHITE)
+                    && grid[ix, iy + 1].Color == TColor.WHITE)
+                    //&& grid[ix, iy + 2].Color == TColor.WHITE)
                     {
                         Down[downCount] = grid[ix, iy].Number;
                         downCount++;
@@ -146,7 +146,8 @@ public class Puzzle
     }
     // Print out the crossword grid including the BLACK squares and clue numbers (5 marks)
     public void PrintGrid() //inverted colourwise as white blanks look better on black background (console)
-    {
+    { // breaks when boxes exceed console window, I cannot even begin to fathom a fix
+        Console.WriteLine("*Note: Colours inverted*");
         //scale grid by largest possible clue number (square of size doubled due to downs and ups), could use actual largest clue number, but that would take much longer *maybe implement later*
         int scale = Convert.ToInt32(Convert.ToString(N * N * 2).Length)*2; //scale=number of digits in 2xN^2,x2. Second double is to let nums go in top left of box 
         linebreak();//see internal linebreak method
@@ -213,13 +214,13 @@ public class Puzzle
     }
     // Return true if the grid is symmetric (à la New York Times); false otherwise (4 marks)
     public bool Symmetric() //hasn't been adequately tested 
-    { //should check for symmetry following matrix definitions (if transpose == original (transpose means rows become columns and vice versa))
-        for (int ix = 0; ix < N; ix++)
+    { //further examples show that symmetry is defined as the crossword being reversible (crossword reads the same forward and backward)
+        for (int iy = 0; iy < N; iy++)
         {
-            for (int iy = 0; iy < N; iy++)
+            for (int ix = 0; ix < N; ix++)
             {
-                if (grid[ix, iy].Color != grid[iy, ix].Color)
-                {//if the grid color at a point is not equal to what the color would be at that point if transposed
+                if (grid[ix, iy].Color != grid[N-1-ix, N-1-iy].Color)
+                {//if the grid color at a point is not equal to what the color would be at that point if reversed
                     return false;
                 }
             }
@@ -236,12 +237,12 @@ public class Demo //for actually doing stuff
         {
             //Console.Write("Input size of crossword :");
             //Puzzle crossword = new Puzzle(Convert.ToInt32(Console.ReadLine())); //wrap in try-catch loop later
-            Puzzle crossword = new Puzzle(9); //for automatic input
+            Puzzle crossword = new Puzzle(3); //for automatic input
 
             //Console.Write("Input number of black spaces :");
             //crossword.Initialize(Convert.ToInt32(Console.ReadLine())); //wrap in try-catch loop later
 
-            crossword.Initialize(26); //for automatic input
+            crossword.Initialize(4); //for automatic input
 
             crossword.Number();
             crossword.PrintGrid();
@@ -254,4 +255,3 @@ public class Demo //for actually doing stuff
         }
     }
 }
-
