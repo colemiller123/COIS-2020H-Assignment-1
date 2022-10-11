@@ -38,7 +38,7 @@ namespace COIS2020HAssignment1
             int userArrayIndex = 0;
 
             //Displays user created MyStrings, verifies the User has entered a valid choice from the menu, return their selection
-            static int VerifyUserInput (int userStringsArrayLength, MyString [] userStrings) {
+            static int VerifyUserInput (int ArrayLength, Object [] userStrings) {
                 string errorMessage = "";
                 bool userInputChecked = false;
                 int userInputInt = -1;
@@ -51,12 +51,19 @@ namespace COIS2020HAssignment1
                     }
 
                     //Get user input
-                    Console.WriteLine("Please type the number to select the MyString Object.");
+                    Console.WriteLine("Please type the number to select the Object.");
                     string userInput = Console.ReadLine();
-                    userInputInt = Int32.Parse(userInput);
+                    
+                    //Check user selection is a number
+                    try {
+                        userInputInt = Int32.Parse(userInput);
+                    }
+                    catch {
+                        errorMessage = "Please choose a number.";
+                    }
 
                     //Check User selection is in the Arrays' index range
-                    if (userInputInt < 0 || userInputInt > userStringsArrayLength) {
+                    if (userInputInt < 0 || userInputInt > ArrayLength) {
                         errorMessage = "Please choose one of the listed numbers.";
                     }
                     else if (userStrings[userInputInt] == null) {
@@ -78,6 +85,8 @@ namespace COIS2020HAssignment1
             //Main Loop
             while (quitProgram == false) {
                 Console.Clear();
+                
+                mainLoop:
                 Console.WriteLine("Part B Main Menu");
                 Console.WriteLine("1: Create a String");
                 Console.WriteLine("2: Reverse a string");
@@ -91,7 +100,17 @@ namespace COIS2020HAssignment1
                 
                 //Get User input
                 string userInput = Console.ReadLine();
-                int userInputInt = Int32.Parse(userInput);
+
+                //Check user selection is a number
+                int userInputInt;
+                try {
+                    userInputInt = Int32.Parse(userInput);
+                }
+                catch {
+                    Console.Clear();
+                    Console.WriteLine("Please choose a number.");
+                    goto mainLoop;
+                }
 
                 //Handle user input
                 switch (userInputInt) {
@@ -111,49 +130,72 @@ namespace COIS2020HAssignment1
                     //Store that string in an array
                     userStrings[userArrayIndex] = newUserString;
                     userArrayIndex++;
-
-                    //wait
-                    wait = Console.ReadLine();
                     break;
                 case 2:
                     userInputInt = VerifyUserInput(userStringsArrayLength, userStrings);
                         
                     //Call method on the selected string
                     userStrings[userInputInt].Reverse();
-
-                    wait = Console.ReadLine();
                     break;
                 case 3:
                     userInputInt = VerifyUserInput(userStringsArrayLength, userStrings);
-                        
+
+                    Console.Clear();
+
+                    caseThree:   
                     //Call method on the selected string
                     Console.WriteLine("Please type the char you would like to remove from the string.");
                     userInput = Console.ReadLine();
 
-                    //verify user input
-                    //CHeck the user has not entered more than one character
+                    //Check the user has not entered more than one character
+                    if (userInput.Length > 1) {
+                        Console.Clear();
+                        Console.WriteLine("Please enter a single character.");
+                        goto caseThree;
+                    }
 
                     char userInputChar = char.Parse(userInput);
-                    Console.WriteLine(userInputChar);
 
                     userStrings[userInputInt].Remove(userInputChar);
-
-                    wait = Console.ReadLine();
                     break;
                 case 4:
+                    int userInputObjectToCompareInt;
+                    bool result;
+                    
                     userInputInt = VerifyUserInput(userStringsArrayLength, userStrings);
 
-                    //Display objects for the User to compare to
-                    
-                    //Prompt User for object
-                    Console.WriteLine("Please type the index number of the object you would like to compare with the previously selected object.");
-                    string userInputObjectToCompare = Console.ReadLine();
-                    int userInputObjectToCompareInt = Int32.Parse(userInputObjectToCompare);
-                    //Car object
-                    //User's MyString objects
+                    Console.Clear();
 
-                    //Call method on the selected string
-                    //userStrings[userInputInt].Equals();
+                    caseFour:
+                    Console.WriteLine("Compare against a user created string or another object?");
+                    Console.WriteLine("1: User String");
+                    Console.WriteLine("2: A non-MyString Object");
+
+                    string inputT = Console.ReadLine();
+                    int inputInt = Int32.Parse(inputT);
+
+                    //Check input is valid
+                    if (inputInt < 1 || inputInt > 2) {
+                        Console.Clear();
+                        Console.WriteLine("Please choose one of the listed numbers.");
+                        goto caseFour;
+                    }
+
+                    //
+                    if (inputInt == 1) {
+                        userInputObjectToCompareInt = VerifyUserInput(userStringsArrayLength, userStrings);
+                        result = userStrings[userInputInt].Equals(userStrings[userInputObjectToCompareInt]);
+                    }
+                    else {
+                        //Create object array
+                        Car carOne = new Car();
+                        Object [] objectArray = {carOne};
+
+                        userInputObjectToCompareInt = VerifyUserInput(objectArray.Length, objectArray);
+                        result = userStrings[userInputInt].Equals(objectArray[userInputObjectToCompareInt]);
+                    }
+
+                    Console.WriteLine(result);
 
                     wait = Console.ReadLine();
                     break;
