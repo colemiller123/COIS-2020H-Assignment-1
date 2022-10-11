@@ -31,9 +31,49 @@ namespace COIS2020HAssignment1
 
             //////////////Demo main menu//////////////////////////
 
-            //lenght of 20 is arbitrary
-            MyString [] userStrings = new MyString[20]; 
+            //length of 20 is arbitrary
+            int userStringsArrayLength = 20;
+            MyString [] userStrings = new MyString[userStringsArrayLength]; 
             bool quitProgram = false;
+            int userArrayIndex = 0;
+
+            //Displays user created MyStrings, verifies the User has entered a valid choice from the menu, return their selection
+            static int VerifyUserInput (int userStringsArrayLength, MyString [] userStrings) {
+                string errorMessage = "";
+                bool userInputChecked = false;
+                int userInputInt = -1;
+
+                //Display list of user created MyStrings
+                Console.Clear();
+                while (userInputChecked == false) {
+                    for (int i = 0; i < userStrings.Length; i++) {
+                        Console.WriteLine(i + ": " + userStrings[i]);
+                    }
+
+                    //Get user input
+                    Console.WriteLine("Please type the number for the string you would like to reverse.");
+                    string userInput = Console.ReadLine();
+                    userInputInt = Int32.Parse(userInput);
+
+                    //Check User selection is in the Arrays' index range
+                    if (userInputInt < 0 || userInputInt > userStringsArrayLength) {
+                        errorMessage = "Please choose one of the listed numbers.";
+                    }
+                    else if (userStrings[userInputInt] == null) {
+                        errorMessage = "Please choose an index with a non empty value.";
+                    }
+
+                    if (errorMessage != "") {
+                        Console.Clear();
+                        Console.WriteLine(errorMessage);
+                        errorMessage = "";
+                    }
+                    else {
+                        userInputChecked = true;
+                    }
+                }
+                return userInputInt;
+            }
 
             //Main Loop
             while (quitProgram == false) {
@@ -48,14 +88,13 @@ namespace COIS2020HAssignment1
                 Console.WriteLine("Please type in the number of the method you want to use.");
 
                 string wait;
-                int userArrayIndex = 0;
                 
                 //Get User input
                 string userInput = Console.ReadLine();
-                int result = Int32.Parse(userInput);
+                int userInputInt = Int32.Parse(userInput);
 
                 //Handle user input
-                switch (result) {
+                switch (userInputInt) {
                 case 1:
                     Console.Clear();
                     Console.WriteLine("Please type the string you would like to create.");
@@ -77,25 +116,37 @@ namespace COIS2020HAssignment1
                     wait = Console.ReadLine();
                     break;
                 case 2:
+                    userInputInt = VerifyUserInput(userStringsArrayLength, userStrings);
+                        
+                    //Call method on the selected string
                     
+
+                    wait = Console.ReadLine();
                     break;
                 case 3:
-                    Console.WriteLine("Wednesday");
+                    //Display list of user created MyStrings
+
+                    //Get user input
+
+                    //Check user input
+
+                    //Call method on the selected string
                     break;
                 case 4:
-                    Console.WriteLine("Thursday");
+                    //Display list of user created MyStrings
+
+                    //Get user input
+
+                    //Check user input
+
+                    //Call method on the selected string
                     break;
                 case 5:
-                    //Display all user created Strings
-                    for (int i = 0; i < ) {
+                    userInputInt = VerifyUserInput(userStringsArrayLength, userStrings);
+                        
+                    //Call method on the selected string
+                    userStrings[userInputInt].Print();
 
-                    }
-
-                    //Prompt them to pick one
-
-                    //print that string
-                    
-                    userStrings[userArrayIndex - 1].Print();
                     wait = Console.ReadLine();
                     break;
                 case 6:
@@ -247,7 +298,7 @@ namespace COIS2020HAssignment1
             public void Print() {
                 Console.WriteLine("Length of the String: " + length);
                 
-                //for each character/node in the linked list, print out the character
+                //For each character/node in the linked list, print out the character
                 Node String = front.next;
                 for (int tempLength = length; tempLength > 0; tempLength--) {
                     Console.WriteLine(String.item);
