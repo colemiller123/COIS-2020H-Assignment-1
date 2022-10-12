@@ -233,7 +233,7 @@ public class Puzzle
                 }
             }
         }
-        return true; //should only get here if all points match the transpose
+        return true; //should only get here if all points match the desired symmetry
     }
 }
 
