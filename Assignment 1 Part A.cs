@@ -82,7 +82,7 @@ public class Puzzle
                     && (ix > 0 && grid[ix - 1, iy].Color == TColor.BLACK || ix == 0)
                     && grid[ix, iy].Color == TColor.WHITE
                     && grid[ix + 1, iy].Color == TColor.WHITE)
-                    //&& grid[ix + 2, iy].Color == TColor.WHITE)
+                //&& grid[ix + 2, iy].Color == TColor.WHITE)
                 {
                     grid[ix, iy].Number = number;
                     number++;
@@ -92,7 +92,7 @@ public class Puzzle
                     && (iy > 0 && grid[ix, iy - 1].Color == TColor.BLACK || iy == 0)
                     && grid[ix, iy].Color == TColor.WHITE
                     && grid[ix, iy + 1].Color == TColor.WHITE)
-                    //&& grid[ix, iy + 2].Color == TColor.WHITE)
+                //&& grid[ix, iy + 2].Color == TColor.WHITE)
                 {
                     grid[ix, iy].Number = number;
                     number++;
@@ -133,36 +133,44 @@ public class Puzzle
                 }
             }
         } //printing
-        Console.WriteLine("\nAcross:");
-        for (int i = 0; i < acrossCount; i++)
+        int scale = Convert.ToInt32(Convert.ToString(N * N * 2).Length) + 5; //scale used to determine spacing when lining up number columns
+        Console.Write("\nAcross:");
+        for (int i = 0; i < scale; i++)
         {
-            Console.WriteLine(Across[i]);
+            Console.Write(' '); //scale based spacing, should give enough horizontal room for biggest clue number without messing up spacing
         }
-        Console.WriteLine("\nDown:");
-        for (int i = 0; i < downCount; i++)
+        Console.WriteLine("Down:");
+        for (int i = 0; i < downCount || i < acrossCount; i++) //repeats until across and down are both exhausted
         {
-            Console.WriteLine(Down[i]);
+            if (i < acrossCount) { Console.Write(Across[i]); } else { Console.Write(' '); } //only prints if there are across clues left, otherwise prints a blank space to maintain spacing(bandaid fix)
+            for (int spacing = 0; spacing < scale + 7 - Convert.ToInt32(Convert.ToString(Across[i]).Length); spacing++) //determining amount of spacing to add, +7 accounts for length of "Across:" string
+            { //increase distance between down and across
+                Console.Write(' '); //spacing
+            }
+            if (i < downCount) { Console.Write(Down[i]); } //only prints if there are down clues left
+            Console.WriteLine();
         }
+
     }
     // Print out the crossword grid including the BLACK squares and clue numbers (5 marks)
     public void PrintGrid() //inverted colourwise as white blanks look better on black background (console)
     { // breaks when boxes exceed console window, I cannot even begin to fathom a fix
         Console.WriteLine("*Note: Colours inverted*");
         //scale grid by largest possible clue number (square of size doubled due to downs and ups), could use actual largest clue number, but that would take much longer *maybe implement later*
-        int scale = Convert.ToInt32(Convert.ToString(N * N * 2).Length)*2; //scale=number of digits in 2xN^2,x2. Second double is to let nums go in top left of box 
+        int scale = Convert.ToInt32(Convert.ToString(N * N * 2).Length) * 2; //scale=number of digits in 2xN^2,x2. Second double is to let nums go in top left of box 
         linebreak();//see internal linebreak method
-        for(int iy=0; iy<N; iy++)
+        for (int iy = 0; iy < N; iy++)
         {
             Console.Write('|'); //front divider to box in squares
             for (int ix = 0; ix < N; ix++) //does tops of every box
             {
-                if(grid[ix,iy].Number != -1) //if current square has a number,
+                if (grid[ix, iy].Number != -1) //if current square has a number,
                 {
                     Console.Write(grid[ix, iy].Number); //write number,
-                    for(int remainder = scale - Convert.ToInt32(Convert.ToString(grid[ix, iy].Number).Length); remainder>0; remainder--) //remainder=scale-digits of current square number
+                    for (int remainder = scale - Convert.ToInt32(Convert.ToString(grid[ix, iy].Number).Length); remainder > 0; remainder--) //remainder=scale-digits of current square number
                     {
                         Console.Write(' '); //fill remaining space on top row in box with void.
-                    }  
+                    }
                 }
                 else if (grid[ix, iy].Color == TColor.WHITE) //if current square has no number but is white,
                 {
@@ -173,18 +181,18 @@ public class Puzzle
                 }
                 else //if current square is black,
                 {
-                    for(int i=0; i<scale; i++)
+                    for (int i = 0; i < scale; i++)
                     {
                         Console.Write('#'); //fill space on top row in box with # to indicate being occupied.
                     }
                 }
                 Console.Write('|'); //end row of box with column divider (|)
             }
-            for(int vertical=0; vertical<scale-4; vertical++) //adds verticality to each box, without this, every box is one line tall
+            for (int vertical = 0; vertical < Math.Round(Math.Sqrt(scale)); vertical++) //adds verticality to each box, without this, every box is one line tall, the amount of verticality is somewhat dependent on width
             {
                 Console.WriteLine(); //next line
                 Console.Write('|');//front divider for row
-                for(int ix=0; ix<N; ix++)
+                for (int ix = 0; ix < N; ix++)
                 {
                     if (grid[ix, iy].Color == TColor.WHITE) //if current square is white,
                     {
@@ -208,7 +216,7 @@ public class Puzzle
         void linebreak() //for separating rows
         {
             Console.WriteLine();
-            for (int i = 0; i < scale*N+N+1; i++) {Console.Write("-");} //scale*N to account for squares, +N+1 to account for column dividers, including the one in front (+1)
+            for (int i = 0; i < scale * N + N + 1; i++) { Console.Write("-"); } //scale*N to account for squares, +N+1 to account for column dividers, including the one in front (+1)
             Console.WriteLine();
         }
     }
@@ -219,7 +227,7 @@ public class Puzzle
         {
             for (int ix = 0; ix < N; ix++)
             {
-                if (grid[ix, iy].Color != grid[N-1-ix, N-1-iy].Color)
+                if (grid[ix, iy].Color != grid[N - 1 - ix, N - 1 - iy].Color)
                 {//if the grid color at a point is not equal to what the color would be at that point if reversed
                     return false;
                 }
@@ -235,14 +243,15 @@ public class Demo //for actually doing stuff
     {
         while (true) //so you can restart without closing and starting up again
         {
-            //Console.Write("Input size of crossword :");
-            //Puzzle crossword = new Puzzle(Convert.ToInt32(Console.ReadLine())); //wrap in try-catch loop later
-            Puzzle crossword = new Puzzle(3); //for automatic input
+            Console.Write("Input size of crossword :");
+            Puzzle crossword = new Puzzle(Convert.ToInt32(Console.ReadLine())); //wrap in try-catch loop later
 
-            //Console.Write("Input number of black spaces :");
-            //crossword.Initialize(Convert.ToInt32(Console.ReadLine())); //wrap in try-catch loop later
+            //Puzzle crossword = new Puzzle(3); //for automatic input
 
-            crossword.Initialize(4); //for automatic input
+            Console.Write("Input number of black spaces :");
+            crossword.Initialize(Convert.ToInt32(Console.ReadLine())); //wrap in try-catch loop later
+
+            //crossword.Initialize(4); //for automatic input
 
             crossword.Number();
             crossword.PrintGrid();
