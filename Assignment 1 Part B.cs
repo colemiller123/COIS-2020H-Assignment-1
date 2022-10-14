@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////////
-//By: Cole Miller
+//By: Cole Miller, Matthew Hellard, and Jesse Laframboise
 //Date: 2022-10-14
 //Project: Assignment 1, part B
 /////////////////////////////////////////////////////
@@ -49,14 +49,14 @@ namespace Testing
                 bool userInputChecked = false;
                 int userInputInt = -1;
 
-                //Display list of user created MyStrings
                 Console.Clear();
+
                 while (userInputChecked == false) {
+                    //Display list of user created MyStrings
                     for (int i = 0; i < userStrings.Length; i++) {
                         Console.WriteLine(i + ": " + userStrings[i]);
                     }
 
-                    //Get user input
                     Console.WriteLine("Please type the number to select the Object.");
                     string userInput = Console.ReadLine();
                     
@@ -68,7 +68,7 @@ namespace Testing
                         errorMessage = "Please choose a number.";
                     }
 
-                    //Check User selection is in the Arrays' index range
+                    //Check User selection is in the Array's index range
                     if (userInputInt < 0 || userInputInt > ArrayLength) {
                         errorMessage = "Please choose one of the listed numbers.";
                     }
@@ -99,7 +99,6 @@ namespace Testing
                 
                 string userInput = "";
                 int userInputInt = 0;
-                string wait;
 
                 bool userinputUnverified = false;
                 while (userinputUnverified == false) {
@@ -113,7 +112,6 @@ namespace Testing
                     Console.WriteLine("7: Quit");
                     Console.WriteLine("Please type in the number of the method you want to use.");
                     
-                    //Get User input
                     userInput = Console.ReadLine();
 
                     //Check user selection is a number
@@ -129,130 +127,128 @@ namespace Testing
 
                 //Handle user input
                 switch (userInputInt) {
-                //Create a new MyString
-                case 1:
-                    Console.Clear();
-                    Console.WriteLine("Please type the string you would like to create.");
-                    userInput = Console.ReadLine();
-                    
-                    //Convert userInput to a char array
-                    char [] userArray = new char[userInput.Length];
-                    for (int i = 0; i < userInput.Length; i++) {
-                        userArray[i] = userInput[i];
-                    }
-
-                    MyString newUserString = new MyString(userArray);
-
-                    //Store that string in an array
-                    userStrings[userArrayIndex] = newUserString;
-                    userArrayIndex++;
-                    break;
-
-                //Reverse a MyString object
-                case 2:
-                    userInputInt = VerifyUserInput(userStringsArrayLength, userStrings);
+                    //Create a new MyString
+                    case 1:
+                        Console.Clear();
+                        Console.WriteLine("Please type the string you would like to create.");
+                        userInput = Console.ReadLine();
                         
-                    //Call method on the selected string
-                    userStrings[userInputInt].Reverse();
-                    break;
-
-                //Return the index of the first occurence of a char in a MyString object
-                case 3:
-                    userInputInt = VerifyUserInput(userStringsArrayLength, userStrings);
-                    
-                    Console.Clear();
-
-                    userInput = CheckSingleCharacter();
-                    char character = Char.Parse(userInput);
-
-                    int indexResult = userStrings[userInputInt].IndexOf(character);
-
-                    Console.WriteLine(indexResult);
-
-                    //Wait
-                    Console.ReadLine();
-                    break; 
-
-                //Remove a single character from a MyString object
-                case 4:
-                    userInputInt = VerifyUserInput(userStringsArrayLength, userStrings);
-
-                    Console.Clear();
- 
-                    userInput = CheckSingleCharacter(); 
-
-                    char userInputChar = char.Parse(userInput);
-
-                    userStrings[userInputInt].Remove(userInputChar);
-                    break;
-                
-                //Compare to objects
-                case 5:
-                    int userInputObjectToCompareInt;
-                    bool result;
-                    int inputInt = -1;
-                    
-                    userInputInt = VerifyUserInput(userStringsArrayLength, userStrings);
-
-                    Console.Clear();
-
-                    bool userSelectionCheck = false;
-                    while (userSelectionCheck == false) {
-                        Console.WriteLine("Compare against a user created string or another object?");
-                        Console.WriteLine("1: User String");
-                        Console.WriteLine("2: A non-MyString Object");
-
-                        string inputT = Console.ReadLine();
-                        inputInt = Int32.Parse(inputT);
-
-                        //Check input is valid
-                        if (inputInt < 1 || inputInt > 2) {
-                            Console.Clear();
-                            Console.WriteLine("Please choose one of the listed numbers.");
+                        //Convert userInput to a char array
+                        char [] userArray = new char[userInput.Length];
+                        for (int i = 0; i < userInput.Length; i++) {
+                            userArray[i] = userInput[i];
                         }
+
+                        MyString newUserString = new MyString(userArray);
+
+                        //Store that string in an array
+                        userStrings[userArrayIndex] = newUserString;
+                        userArrayIndex++;
+                        break;
+
+                    //Reverse a MyString object
+                    case 2:
+                        userInputInt = VerifyUserInput(userStringsArrayLength, userStrings);
+                            
+                        //Call method on the selected string
+                        userStrings[userInputInt].Reverse();
+                        break;
+
+                    //Return the index of the first occurence of a char in a MyString object
+                    case 3:
+                        userInputInt = VerifyUserInput(userStringsArrayLength, userStrings);
+                        
+                        Console.Clear();
+
+                        userInput = CheckSingleCharacter();
+                        char character = Char.Parse(userInput);
+
+                        int indexResult = userStrings[userInputInt].IndexOf(character);
+
+                        Console.WriteLine(indexResult);
+
+                        //Wait
+                        Console.ReadLine();
+                        break; 
+
+                    //Remove a single character from a MyString object
+                    case 4:
+                        userInputInt = VerifyUserInput(userStringsArrayLength, userStrings);
+
+                        Console.Clear();
+    
+                        userInput = CheckSingleCharacter(); 
+
+                        char userInputChar = char.Parse(userInput);
+
+                        userStrings[userInputInt].Remove(userInputChar);
+                        break;
+                    
+                    //Compare to objects
+                    case 5:
+                        int userInputObjectToCompareInt;
+                        bool result;
+                        int inputInt = -1;
+                        
+                        userInputInt = VerifyUserInput(userStringsArrayLength, userStrings);
+
+                        Console.Clear();
+
+                        bool userSelectionCheck = false;
+                        while (userSelectionCheck == false) {
+                            Console.WriteLine("Compare against a user created string or another object?");
+                            Console.WriteLine("1: User String");
+                            Console.WriteLine("2: A non-MyString Object");
+
+                            string inputT = Console.ReadLine();
+                            inputInt = Int32.Parse(inputT);
+
+                            //Check input is valid
+                            if (inputInt < 1 || inputInt > 2) {
+                                Console.Clear();
+                                Console.WriteLine("Please choose one of the listed numbers.");
+                            }
+                            else {
+                                userSelectionCheck = true;
+                            }
+                        }
+
+                        //Show the User his created MyStrings
+                        if (inputInt == 1) {
+                            userInputObjectToCompareInt = VerifyUserInput(userStringsArrayLength, userStrings);
+                            result = userStrings[userInputInt].Equals(userStrings[userInputObjectToCompareInt]);
+                        }
+                        //Show other premade objects
                         else {
-                            userSelectionCheck = true;
+                            //Create object array
+                            Car carOne = new Car();
+                            Object [] objectArray = {carOne};
+
+                            userInputObjectToCompareInt = VerifyUserInput(objectArray.Length, objectArray);
+                            result = userStrings[userInputInt].Equals(objectArray[userInputObjectToCompareInt]);
                         }
-                    }
 
-                    //Show the User his created MyStrings
-                    if (inputInt == 1) {
-                        userInputObjectToCompareInt = VerifyUserInput(userStringsArrayLength, userStrings);
-                        result = userStrings[userInputInt].Equals(userStrings[userInputObjectToCompareInt]);
-                    }
-                    //Show other premade objects
-                    else {
-                        //Create object array
-                        Car carOne = new Car();
-                        Object [] objectArray = {carOne};
+                        Console.WriteLine(result);
 
-                        userInputObjectToCompareInt = VerifyUserInput(objectArray.Length, objectArray);
-                        result = userStrings[userInputInt].Equals(objectArray[userInputObjectToCompareInt]);
-                    }
+                        //Wait
+                        Console.ReadLine();
+                        break;
 
-                    Console.WriteLine(result);
+                    //Print the selected string
+                    case 6:
+                        userInputInt = VerifyUserInput(userStringsArrayLength, userStrings);
+                            
+                        //Call method on the selected string
+                        userStrings[userInputInt].Print();
 
-                    //Wait
-                    Console.ReadLine();
-                    break;
+                        //Wait
+                        Console.ReadLine();
+                        break;
 
-                //Print the selected string
-                case 6:
-                    userInputInt = VerifyUserInput(userStringsArrayLength, userStrings);
-                        
-                    //Call method on the selected string
-                    userStrings[userInputInt].Print();
-
-                    //Wait
-                    Console.ReadLine();
-                    break;
-
-                case 7:
-                    quitProgram = true;
-                    break;
+                    case 7:
+                        quitProgram = true;
+                        break;
                 }
-                //testing
-                Console.WriteLine(userInput);
             }
         }
 
@@ -369,7 +365,7 @@ namespace Testing
                 if (obj.GetType() == this.GetType()) {
                     MyString objToCompare = (MyString) obj;
 
-                    //Check if the instances' have the same data
+                    //Check if the instance's have the same data
                     if (this.length == objToCompare.length) {
                         Node tempThis = this.front;
                         Node tempObjectNodeToCompare = objToCompare.front;
@@ -395,8 +391,6 @@ namespace Testing
             
             // Print out this instance of MyString (3 marks)
             public void Print() {
-                Console.WriteLine("Length of the String: " + length);
-                
                 //For each character/node in the linked list, print out the character
                 Node String = front.next;
                 for (int tempLength = length; tempLength > 0; tempLength--) {
