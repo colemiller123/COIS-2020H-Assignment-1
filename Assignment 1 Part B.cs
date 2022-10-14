@@ -11,8 +11,6 @@
 //Change the launch.json file's console parameter to "console": "externalTerminal",
 //Run --> Start debugging
 //Say "Yes" to download missing assets
-//Change namesace to the file folder you are testing from
-
 
 class Program
 {
