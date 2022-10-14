@@ -170,6 +170,7 @@ public class Puzzle
         }
 
     }
+
     // Print out the crossword grid including the BLACK squares and clue numbers (5 marks)
     public void PrintGrid() //inverted colourwise as white black squares look better on black background (console)
     { // breaks when boxes exceed console window, no reasonable fix as it depends on console window size and display size, neither of which can be reasonably known by this program let alone dealt with
@@ -284,3 +285,4 @@ public class Demo //get rid of this class before handing in? (not part of assign
         }
     }
 }
+
