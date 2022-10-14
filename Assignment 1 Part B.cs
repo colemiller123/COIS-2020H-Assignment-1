@@ -19,7 +19,7 @@ namespace Testing
     {
         static void Main(string[] args)
         {
-            //Check if the user has entered more than one character
+            //Prompt the User for a single character and check if the User has entered more than one character
             static string CheckSingleCharacter() {
                 bool singleCharacterCheck = false;
                 string userInput = "";
