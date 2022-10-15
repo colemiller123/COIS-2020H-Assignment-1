@@ -104,14 +104,18 @@ public class Puzzle
                     grid[ix, iy].Number = number;
                     number++;
                 }
-                //down considerations, doesn't overwrite existing numbers because an existing number would be for across and would never be overwritten by down 
-                if (iy + 1 < N && grid[ix, iy].Number == -1 //if number is unused and on top end of grid or below black square, and space is ample
+                //down considerations, only considered if current position wasn't deemed a viable across
+                else if (iy + 1 < N//if on top end of grid or below black square, and space is ample
                     && (iy > 0 && grid[ix, iy - 1].Color == TColor.BLACK || iy == 0)
                     && grid[ix, iy].Color == TColor.WHITE
                     && grid[ix, iy + 1].Color == TColor.WHITE)
                 {
                     grid[ix, iy].Number = number;
                     number++;
+                }
+                else //sets any positions that shouldn't be numbered to not be numbered
+                {
+                    grid[ix, iy].Number = -1;
                 }
             }
         }
@@ -206,7 +210,7 @@ public class Puzzle
                     }
                 }
                 Console.Write('|'); //end row of box with column divider (|)
-            } // at this point top row of current square of current row has been printed
+            } // at this point top row of all squares of current row has been printed
             //adding verticality to each box, without this, every box is one line tall, the amount of verticality is somewhat dependent on width (N)
             for (int vertical = 0; vertical < Math.Round(Math.Sqrt(scale)); vertical++) 
             {
