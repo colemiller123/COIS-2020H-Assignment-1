@@ -73,7 +73,7 @@ public class Puzzle
         //placing black squares and updating list
         Random rand = new Random(); //Random class used to generate random ints
         int index = 0;
-        while (index < M && index < N * N) //while index is less than M AND N^2, considering N lets users "overfill" the grid without consequence
+        while (index < M && vacanciesCount!=0) //while index is less than M AND there exist vacancies, considering vacanciesCount lets users "overfill" the grid without consequence
         {
             int listPicker = rand.Next(0, vacanciesCount); //picking random coord from list of available coords to make black
             grid[vacancies[listPicker, 0], vacancies[listPicker, 1]].Color = TColor.BLACK; //making square at randomly chosen coord from vacancies black
@@ -172,7 +172,6 @@ public class Puzzle
             if (i < downCount) { Console.Write(Down[i]); } //only prints if there are down clues left
             Console.WriteLine();
         }
-
     }
 
     // Print out the crossword grid including the BLACK squares and clue numbers (5 marks)
@@ -289,4 +288,3 @@ public class Demo //get rid of this class before handing in? (not part of assign
         }
     }
 }
-
