@@ -261,7 +261,7 @@ public class Puzzle
     }
 }
 
-public class Demo //get rid of this class before handing in? (not part of assignment)
+public class Demo //for demonstrating Puzzle class
 {
     public static void Main()
     {
